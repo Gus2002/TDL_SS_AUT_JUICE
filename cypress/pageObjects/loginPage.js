@@ -13,6 +13,9 @@ class LoginPage extends BasePage{
     static get loginBtn(){
         return cy.get("#loginButton")
     }
+    static get newCustomerLink(){
+        return cy.get("[routerlink='/register']")
+    }
 
 
 }
