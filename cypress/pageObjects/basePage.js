@@ -21,6 +21,9 @@ class BasePage {
     static get meWantIt(){
         return cy.get("[aria-label='dismiss cookie message']")
     }
+    static get yourBasket(){
+        return cy.get("[routerlink='/basket']")
+    }
 
 
 }

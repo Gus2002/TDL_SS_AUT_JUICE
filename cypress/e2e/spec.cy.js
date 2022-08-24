@@ -2,6 +2,12 @@ import LoginPage from "../../cypress/pageObjects/loginPage";
 import BasePage from "../../cypress/pageObjects/basePage";
 import SearchPage from "../pageObjects/searchPage";
 import RegisterPage from "../pageObjects/registerPage";
+import BasketPage from "../pageObjects/basketPage";
+import SelectAddressPage from "../pageObjects/selectAddressPage";
+import DeliveryMethodPage from "../pageObjects/deliveryMethodPage";
+import PaymentOptionsPage from "../pageObjects/paymentOptionsPage";
+import OrderSummaryPage from "../pageObjects/orderSummaryPage";
+import OrderCompletionPage from "../pageObjects/orderCompletionPage";
 
 
 
@@ -78,13 +84,32 @@ context("Shop testing", () => {
       SearchPage.closeCard.click()
     }
   })
-  it.only("Add a review", () => {
+  it("Add a review", () => {
 
     SearchPage.searchIcon.click()
     SearchPage.searchInput.type("Raspberry").type('{enter}')
     SearchPage.productImg("Raspberry Juice (1000ml)").click()
     SearchPage.reviewInput.type("Tastes like metal", {force: true})
+    SearchPage.submitReview.click()
     SearchPage.expandReviews.click()
     SearchPage.review.should("have.text", "Tastes like metal")
+  })
+  it.only("Buy Girlie T-shirt", () => {
+  
+    SearchPage.searchIcon.click()
+    SearchPage.searchInput.type("Girlie").type('{enter}')
+    SearchPage.addToBasket(0).click()
+    SearchPage.yourBasket.click()
+    BasketPage.checkoutBtn.click({force:true})
+    SelectAddressPage.selectRadio.click({force:true})
+    SelectAddressPage.continueBtn.click()
+    DeliveryMethodPage.standardDeliveryBtn.click({force:true})
+    DeliveryMethodPage.continueBtn.click()
+    PaymentOptionsPage.selectCard.click()
+    PaymentOptionsPage.continueBtn.click()
+    OrderSummaryPage.checkoutBtn.click()
+    OrderCompletionPage.confirmMsg.should("have.text", "Thank you for your purchase!")
+    
+
   })
 })

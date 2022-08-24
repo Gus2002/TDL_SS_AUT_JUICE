@@ -23,11 +23,17 @@ class SearchPage extends BasePage{
     static get reviewInput(){
         return cy.get("[aria-label='Text field to review a product']")
     }
+    static get submitReview(){
+        return cy.get("#submitButton")
+    }
     static get expandReviews(){
         return cy.get("mat-expansion-panel-header > span").eq(0)
     }
     static get review(){
         return cy.get("cite + p").eq(0)
+    }
+    static addToBasket(product_index){
+        return cy.get("[aria-label='Add to Basket']").eq(product_index)
     }
 }
 
