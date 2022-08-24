@@ -53,15 +53,29 @@ context("Shop testing", () => {
     LoginPage.passwordInput.type("demo")
     LoginPage.loginBtn.click()
   })
-  it.only("Search and validate lemon", () => {
-    // Click on search icon
-    // Search for Lemon
-    // Select a product card - Lemon Juice (500ml)
-    // Validate that the card (should) contains "Sour but full of vitamins."
+  it("Search and validate lemon", () => {
 
     SearchPage.searchIcon.click()
     SearchPage.searchInput.type("Lemon").type('{enter}')
     SearchPage.productImg("Lemon Juice (500ml)").click()
     SearchPage.productCard.should("contain", "Sour but full of vitamins.")
+  })
+  it("Search 500ml and validate Lemon, while having multiple cards", () => {
+    SearchPage.searchIcon.click()
+    SearchPage.searchInput.type("500ml").type('{enter}')
+    SearchPage.productImg("Lemon Juice (500ml)").click()
+    SearchPage.productCard.should("contain", "Sour but full of vitamins.")
+  })
+  it.only("Search 500ml and validate cards", () => {
+    const products = ["Eggfruit Juice (500ml)","Lemon Juice (500ml)","Strawberry Juice (500ml)"]
+    const descriptions = ["Now with even more exotic flavour.","Sour but full of vitamins.", "Sweet & tasty!"]
+
+    SearchPage.searchIcon.click()
+    SearchPage.searchInput.type("500ml").type('{enter}')
+    for(let i = 0;i<products.length;i++){
+      SearchPage.productImg(products[i]).click()
+      SearchPage.productCard.should("contain", descriptions[i])
+      SearchPage.closeCard.click()
+    }
   })
 })

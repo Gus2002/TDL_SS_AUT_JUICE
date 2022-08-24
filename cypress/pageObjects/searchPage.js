@@ -17,6 +17,9 @@ class SearchPage extends BasePage{
     static get productCard(){
         return cy.get("h1 + div")
     }
+    static get closeCard(){
+        return cy.get('.close-dialog > .mat-button-wrapper > span')
+    }
 }
 
 export default SearchPage
