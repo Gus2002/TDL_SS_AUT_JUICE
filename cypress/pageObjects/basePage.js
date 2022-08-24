@@ -30,6 +30,9 @@ class BasePage {
     static get mySavedAddressesBtn(){
         return cy.get("[aria-label='Go to saved address page']")
     }
+    static get myPaymentOptionsBtn(){
+        return cy.get("[aria-label='Go to saved payment methods page']")
+    }
 
 
 }

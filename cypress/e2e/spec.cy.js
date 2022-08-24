@@ -10,6 +10,7 @@ import OrderSummaryPage from "../pageObjects/orderSummaryPage";
 import OrderCompletionPage from "../pageObjects/orderCompletionPage";
 import SavedAddressesPage from "../pageObjects/savedAddressesPage";
 import CreateAddressPage from "../pageObjects/createAddressPage";
+import SavedPaymentMethodsPage from "../pageObjects/savedPaymentMethodsPage";
 
 
 
@@ -127,18 +128,8 @@ context("Shop testing", () => {
     
 
   })
-  it.only("Add address", () => {
-      // Click on Account
-  // Click on Orders & Payment
-  // Click on My saved addresses
-  // Create page object - SavedAddressesPage
-  // Click on Add New Address
-  // Create page object - CreateAddressPage
-  // Fill in the necessary information
-  // Click Submit button
-  // Validate that previously added address is visible
+  it("Add address", () => {
 
-  
     SearchPage.accountBtn.click()
     SearchPage.ordersAndPaymentsBtn.click()
     SearchPage.mySavedAddressesBtn.click()
@@ -157,8 +148,21 @@ context("Shop testing", () => {
       SavedAddressesPage.LastRowCells.eq(1).should("contain",address_info[i])
     }
     SavedAddressesPage.LastRowCells.eq(2).should("contain", "United States")
-    
-    
+  })
+  it.only("Add payment option", () => {
 
+    SearchPage.accountBtn.click()
+    SearchPage.ordersAndPaymentsBtn.click()
+    SearchPage.myPaymentOptionsBtn.click()
+    SavedPaymentMethodsPage.addNewCard.click()
+    SavedPaymentMethodsPage.nameInput.type("John")
+    SavedPaymentMethodsPage.cardInput.type("1845734586923619")
+    SavedPaymentMethodsPage.expiryMonthBtn.select("7")
+    SavedPaymentMethodsPage.expiryYearBtn.select("2090")
+    SavedPaymentMethodsPage.submitButton.click()
+    SavedPaymentMethodsPage.lastRowCells.eq(0).should("contain", "************3619")
+    SavedPaymentMethodsPage.lastRowCells.eq(1).should("contain", "John")
+    SavedPaymentMethodsPage.lastRowCells.eq(2).should("contain", "7/2090")
+    
   })
 })
