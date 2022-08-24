@@ -24,6 +24,12 @@ class BasePage {
     static get yourBasket(){
         return cy.get("[routerlink='/basket']")
     }
+    static get ordersAndPaymentsBtn(){
+        return cy.get("button[aria-label='Show Orders and Payment Menu']")
+    }
+    static get mySavedAddressesBtn(){
+        return cy.get("[aria-label='Go to saved address page']")
+    }
 
 
 }

@@ -8,6 +8,8 @@ import DeliveryMethodPage from "../pageObjects/deliveryMethodPage";
 import PaymentOptionsPage from "../pageObjects/paymentOptionsPage";
 import OrderSummaryPage from "../pageObjects/orderSummaryPage";
 import OrderCompletionPage from "../pageObjects/orderCompletionPage";
+import SavedAddressesPage from "../pageObjects/savedAddressesPage";
+import CreateAddressPage from "../pageObjects/createAddressPage";
 
 
 
@@ -94,7 +96,7 @@ context("Shop testing", () => {
     SearchPage.expandReviews.click()
     SearchPage.review.should("have.text", "Tastes like metal")
   })
-  it.only("Validate product card amount", () => {
+  it("Validate product card amount", () => {
     
     SearchPage.cardAmount.scrollIntoView()
     SearchPage.imgButtons.should("have.length", 12)
@@ -122,6 +124,40 @@ context("Shop testing", () => {
     PaymentOptionsPage.continueBtn.click()
     OrderSummaryPage.checkoutBtn.click()
     OrderCompletionPage.confirmMsg.should("have.text", "Thank you for your purchase!")
+    
+
+  })
+  it.only("Add address", () => {
+      // Click on Account
+  // Click on Orders & Payment
+  // Click on My saved addresses
+  // Create page object - SavedAddressesPage
+  // Click on Add New Address
+  // Create page object - CreateAddressPage
+  // Fill in the necessary information
+  // Click Submit button
+  // Validate that previously added address is visible
+
+  
+    SearchPage.accountBtn.click()
+    SearchPage.ordersAndPaymentsBtn.click()
+    SearchPage.mySavedAddressesBtn.click()
+    SavedAddressesPage.addNewAddressBtn.click()
+    CreateAddressPage.countryInput.type("United States")
+    CreateAddressPage.nameInput.type("John")
+    CreateAddressPage.mobileInput.type("284574954")
+    CreateAddressPage.zipCodeInput.type("1011")
+    CreateAddressPage.addressInput.type("High Street 10")
+    CreateAddressPage.cityInput.type("Seattle")
+    CreateAddressPage.stateInput.type("Washington")
+    CreateAddressPage.submitBtn.click()
+    SavedAddressesPage.LastRowCells.eq(0).should("contain", "John")
+    const address_info = ["High Street 10", "Seattle", "Washington","1011"]
+    for(let i = 0;i<address_info.length; i++){
+      SavedAddressesPage.LastRowCells.eq(1).should("contain",address_info[i])
+    }
+    SavedAddressesPage.LastRowCells.eq(2).should("contain", "United States")
+    
     
 
   })
