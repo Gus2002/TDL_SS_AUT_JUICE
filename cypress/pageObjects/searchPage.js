@@ -35,6 +35,16 @@ class SearchPage extends BasePage{
     static addToBasket(product_index){
         return cy.get("[aria-label='Add to Basket']").eq(product_index)
     }
+    static get cardAmount(){
+        return cy.get("div[id='mat-select-value-1'] > span > span")
+    }
+    static resultCountBtn(result_amount){
+        return cy.get("[class='mat-option-text']").contains(result_amount)
+    }
+    static get imgButtons(){
+        return cy.get("img[role='button']")
+    }
+    
 }
 
 export default SearchPage

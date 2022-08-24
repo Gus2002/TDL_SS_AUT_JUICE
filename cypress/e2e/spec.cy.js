@@ -94,7 +94,20 @@ context("Shop testing", () => {
     SearchPage.expandReviews.click()
     SearchPage.review.should("have.text", "Tastes like metal")
   })
-  it.only("Buy Girlie T-shirt", () => {
+  it.only("Validate product card amount", () => {
+    
+    SearchPage.cardAmount.scrollIntoView()
+    SearchPage.imgButtons.should("have.length", 12)
+    SearchPage.cardAmount.click()
+    SearchPage.resultCountBtn("24").click()
+    SearchPage.cardAmount.scrollIntoView()
+    SearchPage.imgButtons.should("have.length", 24)
+    SearchPage.cardAmount.click()
+    SearchPage.resultCountBtn("36").click()
+    SearchPage.cardAmount.scrollIntoView()
+    SearchPage.imgButtons.should("have.length", 35)
+  })
+  it("Buy Girlie T-shirt", () => {
   
     SearchPage.searchIcon.click()
     SearchPage.searchInput.type("Girlie").type('{enter}')
