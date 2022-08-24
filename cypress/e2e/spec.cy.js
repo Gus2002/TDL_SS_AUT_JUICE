@@ -66,7 +66,7 @@ context("Shop testing", () => {
     SearchPage.productImg("Lemon Juice (500ml)").click()
     SearchPage.productCard.should("contain", "Sour but full of vitamins.")
   })
-  it.only("Search 500ml and validate cards", () => {
+  it("Search 500ml and validate cards", () => {
     const products = ["Eggfruit Juice (500ml)","Lemon Juice (500ml)","Strawberry Juice (500ml)"]
     const descriptions = ["Now with even more exotic flavour.","Sour but full of vitamins.", "Sweet & tasty!"]
 
@@ -77,5 +77,14 @@ context("Shop testing", () => {
       SearchPage.productCard.should("contain", descriptions[i])
       SearchPage.closeCard.click()
     }
+  })
+  it.only("Add a review", () => {
+
+    SearchPage.searchIcon.click()
+    SearchPage.searchInput.type("Raspberry").type('{enter}')
+    SearchPage.productImg("Raspberry Juice (1000ml)").click()
+    SearchPage.reviewInput.type("Tastes like metal", {force: true})
+    SearchPage.expandReviews.click()
+    SearchPage.review.should("have.text", "Tastes like metal")
   })
 })
