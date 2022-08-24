@@ -22,7 +22,7 @@ context("Login and registration", () => {
     SearchPage.accountName.should("contain", "demo")
   });
 
-  it.only("Registering", () => {
+  it("Registering", () => {
     BasePage.accountBtn.click({force:true})
     BasePage.loginBtn.click({force:true})
     LoginPage.newCustomerLink.click({force:true})
@@ -41,5 +41,27 @@ context("Login and registration", () => {
     SearchPage.accountBtn.click()
     SearchPage.accountName.should("contain", email)
 
+  })
+})
+
+context("Shop testing", () => {
+  beforeEach(()=>{
+    LoginPage.visit()
+    LoginPage.closeWelcome.click()
+    LoginPage.meWantIt.click()
+    LoginPage.emailInput.type("demo")
+    LoginPage.passwordInput.type("demo")
+    LoginPage.loginBtn.click()
+  })
+  it.only("Search and validate lemon", () => {
+    // Click on search icon
+    // Search for Lemon
+    // Select a product card - Lemon Juice (500ml)
+    // Validate that the card (should) contains "Sour but full of vitamins."
+
+    SearchPage.searchIcon.click()
+    SearchPage.searchInput.type("Lemon").type('{enter}')
+    SearchPage.productImg("Lemon Juice (500ml)").click()
+    SearchPage.productCard.should("contain", "Sour but full of vitamins.")
   })
 })
